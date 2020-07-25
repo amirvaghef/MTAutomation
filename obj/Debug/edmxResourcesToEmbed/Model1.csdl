@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MTProviderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MTHistoryDT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="MSID" Type="Int16" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+    <Property Name="Open" Type="Double" />
+    <Property Name="Close" Type="Double" />
+    <Property Name="Low" Type="Double" />
+    <Property Name="High" Type="Double" />
+    <Property Name="Volume" Type="Double" />
+    <NavigationProperty Name="MTHistoryM" Relationship="Self.FK_MTHistoryDT_MTHistoryMS" FromRole="MTHistoryDT" ToRole="MTHistoryMS" />
+  </EntityType>
+  <EntityType Name="MTHistoryM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Symbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Name="Period" Type="Int32" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="AutoBuySell" Type="Boolean" />
+    <NavigationProperty Name="MTHistoryDTs" Relationship="Self.FK_MTHistoryDT_MTHistoryMS" FromRole="MTHistoryMS" ToRole="MTHistoryDT" />
+    <NavigationProperty Name="MTPeriod" Relationship="Self.FK_MTHistoryMS_MTPeriod" FromRole="MTHistoryMS" ToRole="MTPeriod" />
+    <NavigationProperty Name="MTSymbol" Relationship="Self.FK_MTHistoryMS_MTSymbols" FromRole="MTHistoryMS" ToRole="MTSymbols" />
+  </EntityType>
+  <EntityType Name="MTPeriod">
+    <Key>
+      <PropertyRef Name="PeriodID" />
+    </Key>
+    <Property Name="PeriodID" Type="Int32" Nullable="false" />
+    <Property Name="PeriodName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="MTHistoryMS" Relationship="Self.FK_MTHistoryMS_MTPeriod" FromRole="MTPeriod" ToRole="MTHistoryMS" />
+  </EntityType>
+  <EntityType Name="MTSymbol">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="AskPrice" Type="Double" />
+    <Property Name="BidPrice" Type="Double" />
+    <Property Name="PerUSDAsk" Type="Double" />
+    <Property Name="PerUSDBid" Type="Double" />
+    <Property Name="ChngFromUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Name="ChngToUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="MTHistoryMS" Relationship="Self.FK_MTHistoryMS_MTSymbols" FromRole="MTSymbols" ToRole="MTHistoryMS" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RowNO" Type="Int32" Nullable="false" />
+    <Property Name="TicketNo" Type="Int32" />
+    <Property Name="SymbolName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Volume" Type="Double" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PositionStatus" Type="Boolean" />
+    <Property Name="IsClose" Type="Boolean" />
+    <Property Name="PositionState" Type="Boolean" Nullable="false" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="ClosePrice" Type="Double" />
+    <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Leverage" Type="Int16" Nullable="false" />
+    <Property Name="PriceInUSD" Type="Double" />
+    <Property Name="PriceInUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SymbolsEnable">
+    <Key>
+      <PropertyRef Name="SymbolName" />
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="SymbolName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_MTHistoryDT_MTHistoryMS">
+    <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="0..1" />
+    <End Role="MTHistoryDT" Type="Self.MTHistoryDT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MTHistoryMS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MTHistoryDT">
+        <PropertyRef Name="MSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MTHistoryMS_MTPeriod">
+    <End Role="MTPeriod" Type="Self.MTPeriod" Multiplicity="0..1" />
+    <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MTPeriod">
+        <PropertyRef Name="PeriodID" />
+      </Principal>
+      <Dependent Role="MTHistoryMS">
+        <PropertyRef Name="Period" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MTHistoryMS_MTSymbols">
+    <End Role="MTSymbols" Type="Self.MTSymbol" Multiplicity="0..1" />
+    <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MTSymbols">
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="MTHistoryMS">
+        <PropertyRef Name="Symbol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MTProviderEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MTHistoryDTs" EntityType="Self.MTHistoryDT" />
+    <EntitySet Name="MTHistoryMS" EntityType="Self.MTHistoryM" />
+    <EntitySet Name="MTPeriods" EntityType="Self.MTPeriod" />
+    <EntitySet Name="MTSymbols" EntityType="Self.MTSymbol" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="SymbolsEnables" EntityType="Self.SymbolsEnable" />
+    <AssociationSet Name="FK_MTHistoryDT_MTHistoryMS" Association="Self.FK_MTHistoryDT_MTHistoryMS">
+      <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+      <End Role="MTHistoryDT" EntitySet="MTHistoryDTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MTHistoryMS_MTPeriod" Association="Self.FK_MTHistoryMS_MTPeriod">
+      <End Role="MTPeriod" EntitySet="MTPeriods" />
+      <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MTHistoryMS_MTSymbols" Association="Self.FK_MTHistoryMS_MTSymbols">
+      <End Role="MTSymbols" EntitySet="MTSymbols" />
+      <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

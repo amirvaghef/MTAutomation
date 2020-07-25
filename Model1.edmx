@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MTProviderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MTHistoryDT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="MSID" Type="smallint" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="Open" Type="float" />
+          <Property Name="Close" Type="float" />
+          <Property Name="Low" Type="float" />
+          <Property Name="High" Type="float" />
+          <Property Name="Volume" Type="float" />
+        </EntityType>
+        <EntityType Name="MTHistoryMS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symbol" Type="nchar" MaxLength="6" />
+          <Property Name="Period" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="AutoBuySell" Type="bit" />
+        </EntityType>
+        <EntityType Name="MTPeriod">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="int" Nullable="false" />
+          <Property Name="PeriodName" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MTSymbols">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="AskPrice" Type="float" />
+          <Property Name="BidPrice" Type="float" />
+          <Property Name="PerUSDAsk" Type="float" />
+          <Property Name="PerUSDBid" Type="float" />
+          <Property Name="ChngFromUSDSymbol" Type="nchar" MaxLength="6" />
+          <Property Name="ChngToUSDSymbol" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RowNO" Type="int" Nullable="false" />
+          <Property Name="TicketNo" Type="int" />
+          <Property Name="SymbolName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Volume" Type="float" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PositionStatus" Type="bit" />
+          <Property Name="IsClose" Type="bit" />
+          <Property Name="PositionState" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="float" />
+          <Property Name="ClosePrice" Type="float" />
+          <Property Name="ExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="Leverage" Type="smallint" Nullable="false" />
+          <Property Name="PriceInUSD" Type="float" />
+          <Property Name="PriceInUSDSymbol" Type="nchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="SymbolsEnable">
+          <Key>
+            <PropertyRef Name="SymbolName" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="SymbolName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <Association Name="FK_MTHistoryDT_MTHistoryMS">
+          <End Role="MTHistoryMS" Type="Self.MTHistoryMS" Multiplicity="0..1" />
+          <End Role="MTHistoryDT" Type="Self.MTHistoryDT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTHistoryMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MTHistoryDT">
+              <PropertyRef Name="MSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTHistoryMS_MTPeriod">
+          <End Role="MTPeriod" Type="Self.MTPeriod" Multiplicity="0..1" />
+          <End Role="MTHistoryMS" Type="Self.MTHistoryMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="MTHistoryMS">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTHistoryMS_MTSymbols">
+          <End Role="MTSymbols" Type="Self.MTSymbols" Multiplicity="0..1" />
+          <End Role="MTHistoryMS" Type="Self.MTHistoryMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTSymbols">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="MTHistoryMS">
+              <PropertyRef Name="Symbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MTProviderModelStoreContainer">
+          <EntitySet Name="MTHistoryDT" EntityType="Self.MTHistoryDT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MTHistoryMS" EntityType="Self.MTHistoryMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MTPeriod" EntityType="Self.MTPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MTSymbols" EntityType="Self.MTSymbols" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SymbolsEnable" EntityType="Self.SymbolsEnable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MTHistoryDT_MTHistoryMS" Association="Self.FK_MTHistoryDT_MTHistoryMS">
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+            <End Role="MTHistoryDT" EntitySet="MTHistoryDT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTHistoryMS_MTPeriod" Association="Self.FK_MTHistoryMS_MTPeriod">
+            <End Role="MTPeriod" EntitySet="MTPeriod" />
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTHistoryMS_MTSymbols" Association="Self.FK_MTHistoryMS_MTSymbols">
+            <End Role="MTSymbols" EntitySet="MTSymbols" />
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MTProviderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MTHistoryDT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MSID" Type="Int16" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="Open" Type="Double" />
+          <Property Name="Close" Type="Double" />
+          <Property Name="Low" Type="Double" />
+          <Property Name="High" Type="Double" />
+          <Property Name="Volume" Type="Double" />
+          <NavigationProperty Name="MTHistoryM" Relationship="Self.FK_MTHistoryDT_MTHistoryMS" FromRole="MTHistoryDT" ToRole="MTHistoryMS" />
+        </EntityType>
+        <EntityType Name="MTHistoryM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Period" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="AutoBuySell" Type="Boolean" />
+          <NavigationProperty Name="MTHistoryDTs" Relationship="Self.FK_MTHistoryDT_MTHistoryMS" FromRole="MTHistoryMS" ToRole="MTHistoryDT" />
+          <NavigationProperty Name="MTPeriod" Relationship="Self.FK_MTHistoryMS_MTPeriod" FromRole="MTHistoryMS" ToRole="MTPeriod" />
+          <NavigationProperty Name="MTSymbol" Relationship="Self.FK_MTHistoryMS_MTSymbols" FromRole="MTHistoryMS" ToRole="MTSymbols" />
+        </EntityType>
+        <EntityType Name="MTPeriod">
+          <Key>
+            <PropertyRef Name="PeriodID" />
+          </Key>
+          <Property Name="PeriodID" Type="Int32" Nullable="false" />
+          <Property Name="PeriodName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MTHistoryMS" Relationship="Self.FK_MTHistoryMS_MTPeriod" FromRole="MTPeriod" ToRole="MTHistoryMS" />
+        </EntityType>
+        <EntityType Name="MTSymbol">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AskPrice" Type="Double" />
+          <Property Name="BidPrice" Type="Double" />
+          <Property Name="PerUSDAsk" Type="Double" />
+          <Property Name="PerUSDBid" Type="Double" />
+          <Property Name="ChngFromUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="ChngToUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="MTHistoryMS" Relationship="Self.FK_MTHistoryMS_MTSymbols" FromRole="MTSymbols" ToRole="MTHistoryMS" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RowNO" Type="Int32" Nullable="false" />
+          <Property Name="TicketNo" Type="Int32" />
+          <Property Name="SymbolName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Volume" Type="Double" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PositionStatus" Type="Boolean" />
+          <Property Name="IsClose" Type="Boolean" />
+          <Property Name="PositionState" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="ClosePrice" Type="Double" />
+          <Property Name="ExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Leverage" Type="Int16" Nullable="false" />
+          <Property Name="PriceInUSD" Type="Double" />
+          <Property Name="PriceInUSDSymbol" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SymbolsEnable">
+          <Key>
+            <PropertyRef Name="SymbolName" />
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="SymbolName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_MTHistoryDT_MTHistoryMS">
+          <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="0..1" />
+          <End Role="MTHistoryDT" Type="Self.MTHistoryDT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTHistoryMS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MTHistoryDT">
+              <PropertyRef Name="MSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTHistoryMS_MTPeriod">
+          <End Role="MTPeriod" Type="Self.MTPeriod" Multiplicity="0..1" />
+          <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTPeriod">
+              <PropertyRef Name="PeriodID" />
+            </Principal>
+            <Dependent Role="MTHistoryMS">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MTHistoryMS_MTSymbols">
+          <End Role="MTSymbols" Type="Self.MTSymbol" Multiplicity="0..1" />
+          <End Role="MTHistoryMS" Type="Self.MTHistoryM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MTSymbols">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="MTHistoryMS">
+              <PropertyRef Name="Symbol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MTProviderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MTHistoryDTs" EntityType="Self.MTHistoryDT" />
+          <EntitySet Name="MTHistoryMS" EntityType="Self.MTHistoryM" />
+          <EntitySet Name="MTPeriods" EntityType="Self.MTPeriod" />
+          <EntitySet Name="MTSymbols" EntityType="Self.MTSymbol" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="SymbolsEnables" EntityType="Self.SymbolsEnable" />
+          <AssociationSet Name="FK_MTHistoryDT_MTHistoryMS" Association="Self.FK_MTHistoryDT_MTHistoryMS">
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+            <End Role="MTHistoryDT" EntitySet="MTHistoryDTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTHistoryMS_MTPeriod" Association="Self.FK_MTHistoryMS_MTPeriod">
+            <End Role="MTPeriod" EntitySet="MTPeriods" />
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MTHistoryMS_MTSymbols" Association="Self.FK_MTHistoryMS_MTSymbols">
+            <End Role="MTSymbols" EntitySet="MTSymbols" />
+            <End Role="MTHistoryMS" EntitySet="MTHistoryMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MTProviderModelStoreContainer" CdmEntityContainer="MTProviderEntities">
+          <EntitySetMapping Name="MTHistoryDTs">
+            <EntityTypeMapping TypeName="MTProviderModel.MTHistoryDT">
+              <MappingFragment StoreEntitySet="MTHistoryDT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MSID" ColumnName="MSID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="Close" ColumnName="Close" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MTHistoryMS">
+            <EntityTypeMapping TypeName="MTProviderModel.MTHistoryM">
+              <MappingFragment StoreEntitySet="MTHistoryMS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="AutoBuySell" ColumnName="AutoBuySell" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MTPeriods">
+            <EntityTypeMapping TypeName="MTProviderModel.MTPeriod">
+              <MappingFragment StoreEntitySet="MTPeriod">
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MTSymbols">
+            <EntityTypeMapping TypeName="MTProviderModel.MTSymbol">
+              <MappingFragment StoreEntitySet="MTSymbols">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AskPrice" ColumnName="AskPrice" />
+                <ScalarProperty Name="BidPrice" ColumnName="BidPrice" />
+                <ScalarProperty Name="PerUSDAsk" ColumnName="PerUSDAsk" />
+                <ScalarProperty Name="PerUSDBid" ColumnName="PerUSDBid" />
+                <ScalarProperty Name="ChngFromUSDSymbol" ColumnName="ChngFromUSDSymbol" />
+                <ScalarProperty Name="ChngToUSDSymbol" ColumnName="ChngToUSDSymbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="MTProviderModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RowNO" ColumnName="RowNO" />
+                <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+                <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PositionStatus" ColumnName="PositionStatus" />
+                <ScalarProperty Name="IsClose" ColumnName="IsClose" />
+                <ScalarProperty Name="PositionState" ColumnName="PositionState" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ClosePrice" ColumnName="ClosePrice" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="Leverage" ColumnName="Leverage" />
+                <ScalarProperty Name="PriceInUSD" ColumnName="PriceInUSD" />
+                <ScalarProperty Name="PriceInUSDSymbol" ColumnName="PriceInUSDSymbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SymbolsEnables">
+            <EntityTypeMapping TypeName="MTProviderModel.SymbolsEnable">
+              <MappingFragment StoreEntitySet="SymbolsEnable">
+                <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
