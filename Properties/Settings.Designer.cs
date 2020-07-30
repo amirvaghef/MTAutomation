@@ -32,5 +32,65 @@ namespace MTAutomation.Properties {
                 return ((string)(this["ConString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string DescisionMakingQuantity {
+            get {
+                return ((string)(this["DescisionMakingQuantity"]));
+            }
+            set {
+                this["DescisionMakingQuantity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string AvailableBudget {
+            get {
+                return ((string)(this["AvailableBudget"]));
+            }
+            set {
+                this["AvailableBudget"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MaxDealingLot {
+            get {
+                return ((string)(this["MaxDealingLot"]));
+            }
+            set {
+                this["MaxDealingLot"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MinDealingLot {
+            get {
+                return ((string)(this["MinDealingLot"]));
+            }
+            set {
+                this["MinDealingLot"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MinMarginNeeded {
+            get {
+                return ((string)(this["MinMarginNeeded"]));
+            }
+            set {
+                this["MinMarginNeeded"] = value;
+            }
+        }
     }
 }

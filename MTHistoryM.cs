@@ -9,9 +9,11 @@
 
 namespace MTAutomation
 {
+    using PropertyChanged;
     using System;
     using System.Collections.Generic;
-    
+
+    [AddINotifyPropertyChangedInterface]
     public partial class MTHistoryM
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +24,11 @@ namespace MTAutomation
     
         public short ID { get; set; }
         public string Symbol { get; set; }
-        public Nullable<int> Period { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<bool> AutoBuySell { get; set; }
+        public int Period { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public bool AutoBuySell { get; set; }
+        public int AllTicks { get; set; }
+        public int MyTicks { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MTHistoryDT> MTHistoryDTs { get; set; }

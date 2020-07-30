@@ -93,4 +93,7 @@ E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csproj.GenerateRe
 E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.exe.licenses
 E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.exe
 E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.pdb
-E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csprojResolveAssemblyReference.cache
+E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csprojAssemblyReference.cache
+E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csproj.CoreCompileInputs.cache
+E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csproj.Fody.CopyLocal.cache
+E:\My Program\MTAutomation\MTAutomation\obj\Debug\MTAutomation.csproj.CopyComplete

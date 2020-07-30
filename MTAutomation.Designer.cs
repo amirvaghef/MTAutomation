@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gvDetailHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coldtSymbol = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldtStartTime = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,6 +44,9 @@
             this.repositoryItemToggleSwitch1 = new DevExpress.XtraEditors.Repository.RepositoryItemToggleSwitch();
             this.coldtLoading = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
+            this.coldtAllTicks = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldtMyTicks = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldtID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvControlHistory = new DevExpress.XtraGrid.GridControl();
             this.gvlHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSymbol = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,6 +86,17 @@
             this.Histories = new System.Windows.Forms.TabPage();
             this.button2 = new System.Windows.Forms.Button();
             this.Setting = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.txtMinMarginNeeded = new System.Windows.Forms.MaskedTextBox();
+            this.txtMinDealingLot = new System.Windows.Forms.MaskedTextBox();
+            this.txtMaxDealingLot = new System.Windows.Forms.MaskedTextBox();
+            this.txtAvailableBudget = new System.Windows.Forms.MaskedTextBox();
+            this.txtDescisionMakingQuantity = new System.Windows.Forms.MaskedTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,6 +110,7 @@
             this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetailHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEdit1.CalendarTimeProperties)).BeginInit();
@@ -114,6 +129,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwOpenPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwClosePosition)).BeginInit();
             this.Histories.SuspendLayout();
+            this.Setting.SuspendLayout();
             this.SuspendLayout();
             // 
             // gvDetailHistory
@@ -123,7 +139,10 @@
             this.coldtStartTime,
             this.coldtPeriod,
             this.colAutomation,
-            this.coldtLoading});
+            this.coldtLoading,
+            this.coldtAllTicks,
+            this.coldtMyTicks,
+            this.coldtID});
             this.gvDetailHistory.GridControl = this.gvControlHistory;
             this.gvDetailHistory.Name = "gvDetailHistory";
             this.gvDetailHistory.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
@@ -133,9 +152,11 @@
             this.gvDetailHistory.OptionsView.ShowGroupPanel = false;
             this.gvDetailHistory.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gvDetailHistory_InitNewRow);
             this.gvDetailHistory.ShownEditor += new System.EventHandler(this.gvDetailHistory_ShownEditor);
+            this.gvDetailHistory.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.GvDetailHistory_CellValueChanged);
             this.gvDetailHistory.InvalidRowException += new DevExpress.XtraGrid.Views.Base.InvalidRowExceptionEventHandler(this.gvDetailHistory_InvalidRowException);
             this.gvDetailHistory.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gvDetailHistory_ValidateRow);
             this.gvDetailHistory.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gvDetailHistory_RowUpdated);
+            this.gvDetailHistory.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvDetailHistory_CustomUnboundColumnData);
             this.gvDetailHistory.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.gvDetailHistory_ValidatingEditor);
             // 
             // coldtSymbol
@@ -212,26 +233,47 @@
             // 
             this.coldtLoading.Caption = "Loading";
             this.coldtLoading.ColumnEdit = this.repositoryItemProgressBar1;
+            this.coldtLoading.FieldName = "coldtLoading";
             this.coldtLoading.Name = "coldtLoading";
             this.coldtLoading.OptionsColumn.AllowEdit = false;
             this.coldtLoading.OptionsColumn.AllowFocus = false;
             this.coldtLoading.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
             this.coldtLoading.OptionsColumn.ReadOnly = true;
             this.coldtLoading.OptionsColumn.TabStop = false;
+            this.coldtLoading.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.coldtLoading.Visible = true;
             this.coldtLoading.VisibleIndex = 3;
             // 
             // repositoryItemProgressBar1
             // 
             this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
+            this.repositoryItemProgressBar1.ShowTitle = true;
+            // 
+            // coldtAllTicks
+            // 
+            this.coldtAllTicks.Caption = "AllTicks";
+            this.coldtAllTicks.FieldName = "AllTicks";
+            this.coldtAllTicks.Name = "coldtAllTicks";
+            // 
+            // coldtMyTicks
+            // 
+            this.coldtMyTicks.Caption = "MyTicks";
+            this.coldtMyTicks.FieldName = "MyTicks";
+            this.coldtMyTicks.Name = "coldtMyTicks";
+            // 
+            // coldtID
+            // 
+            this.coldtID.Caption = "ID";
+            this.coldtID.FieldName = "ID";
+            this.coldtID.Name = "coldtID";
             // 
             // gvControlHistory
             // 
             this.gvControlHistory.Dock = System.Windows.Forms.DockStyle.Top;
-            gridLevelNode1.LevelTemplate = this.gvDetailHistory;
-            gridLevelNode1.RelationName = "MTHistoryMS";
+            gridLevelNode2.LevelTemplate = this.gvDetailHistory;
+            gridLevelNode2.RelationName = "MTHistoryMS";
             this.gvControlHistory.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gvControlHistory.Location = new System.Drawing.Point(3, 3);
             this.gvControlHistory.MainView = this.gvlHistory;
             this.gvControlHistory.Name = "gvControlHistory";
@@ -262,6 +304,7 @@
             this.gvlHistory.Name = "gvlHistory";
             this.gvlHistory.OptionsCustomization.AllowGroup = false;
             this.gvlHistory.OptionsDetail.AllowExpandEmptyDetails = true;
+            this.gvlHistory.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             this.gvlHistory.OptionsView.ShowGroupPanel = false;
             this.gvlHistory.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvlHistory_MasterRowExpanded);
             this.gvlHistory.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvlHistory_MasterRowGetChildList);
@@ -306,10 +349,10 @@
             // repositoryItemButtonEdit1
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
-            serializableAppearanceObject1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            serializableAppearanceObject1.Options.UseBackColor = true;
+            serializableAppearanceObject5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            serializableAppearanceObject5.Options.UseBackColor = true;
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.OK, "Transfer", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.OK, "Transfer", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.repositoryItemButtonEdit1.Mask.ShowPlaceHolders = false;
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -603,18 +646,129 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(167, 28);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Transfer History";
+            this.button2.Text = "Save";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Setting
             // 
+            this.Setting.Controls.Add(this.button3);
+            this.Setting.Controls.Add(this.txtMinMarginNeeded);
+            this.Setting.Controls.Add(this.txtMinDealingLot);
+            this.Setting.Controls.Add(this.txtMaxDealingLot);
+            this.Setting.Controls.Add(this.txtAvailableBudget);
+            this.Setting.Controls.Add(this.txtDescisionMakingQuantity);
+            this.Setting.Controls.Add(this.label5);
+            this.Setting.Controls.Add(this.label4);
+            this.Setting.Controls.Add(this.label3);
+            this.Setting.Controls.Add(this.label2);
+            this.Setting.Controls.Add(this.label1);
             this.Setting.Location = new System.Drawing.Point(4, 22);
             this.Setting.Name = "Setting";
             this.Setting.Size = new System.Drawing.Size(943, 535);
             this.Setting.TabIndex = 2;
             this.Setting.Text = "Setting";
             this.Setting.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(120, 267);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 31);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Save";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // txtMinMarginNeeded
+            // 
+            this.txtMinMarginNeeded.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMinMarginNeeded.Location = new System.Drawing.Point(216, 192);
+            this.txtMinMarginNeeded.Mask = "##.## %";
+            this.txtMinMarginNeeded.Name = "txtMinMarginNeeded";
+            this.txtMinMarginNeeded.Size = new System.Drawing.Size(115, 23);
+            this.txtMinMarginNeeded.TabIndex = 9;
+            // 
+            // txtMinDealingLot
+            // 
+            this.txtMinDealingLot.Location = new System.Drawing.Point(216, 148);
+            this.txtMinDealingLot.Mask = "##.##";
+            this.txtMinDealingLot.Name = "txtMinDealingLot";
+            this.txtMinDealingLot.Size = new System.Drawing.Size(115, 20);
+            this.txtMinDealingLot.TabIndex = 8;
+            // 
+            // txtMaxDealingLot
+            // 
+            this.txtMaxDealingLot.Location = new System.Drawing.Point(216, 105);
+            this.txtMaxDealingLot.Mask = "##.##";
+            this.txtMaxDealingLot.Name = "txtMaxDealingLot";
+            this.txtMaxDealingLot.Size = new System.Drawing.Size(115, 20);
+            this.txtMaxDealingLot.TabIndex = 7;
+            // 
+            // txtAvailableBudget
+            // 
+            this.txtAvailableBudget.Location = new System.Drawing.Point(216, 65);
+            this.txtAvailableBudget.Name = "txtAvailableBudget";
+            this.txtAvailableBudget.Size = new System.Drawing.Size(115, 20);
+            this.txtAvailableBudget.TabIndex = 6;
+            // 
+            // txtDescisionMakingQuantity
+            // 
+            this.txtDescisionMakingQuantity.Location = new System.Drawing.Point(216, 22);
+            this.txtDescisionMakingQuantity.Name = "txtDescisionMakingQuantity";
+            this.txtDescisionMakingQuantity.Size = new System.Drawing.Size(115, 20);
+            this.txtDescisionMakingQuantity.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 193);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(139, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Min Margin Needed: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 149);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 17);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Min Dealing Lot: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(117, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Max Dealing Lot: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Available Budget: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Descision Making Quantity: ";
             // 
             // dataGridViewTextBoxColumn12
             // 
@@ -697,6 +851,12 @@
             this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             this.dataGridViewTextBoxColumn24.Width = 180;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            // 
             // MTAutomation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -726,6 +886,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgwOpenPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgwClosePosition)).EndInit();
             this.Histories.ResumeLayout(false);
+            this.Setting.ResumeLayout(false);
+            this.Setting.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -794,6 +956,21 @@
         private System.Windows.Forms.Button button2;
         private DevExpress.XtraGrid.Columns.GridColumn coldtLoading;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MaskedTextBox txtMinMarginNeeded;
+        private System.Windows.Forms.MaskedTextBox txtMinDealingLot;
+        private System.Windows.Forms.MaskedTextBox txtMaxDealingLot;
+        private System.Windows.Forms.MaskedTextBox txtAvailableBudget;
+        private System.Windows.Forms.MaskedTextBox txtDescisionMakingQuantity;
+        private System.Windows.Forms.Button button3;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private DevExpress.XtraGrid.Columns.GridColumn coldtAllTicks;
+        private DevExpress.XtraGrid.Columns.GridColumn coldtMyTicks;
+        private DevExpress.XtraGrid.Columns.GridColumn coldtID;
     }
 }
 

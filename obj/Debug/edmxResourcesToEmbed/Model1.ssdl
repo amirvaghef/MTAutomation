@@ -18,10 +18,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Symbol" Type="nchar" MaxLength="6" />
-    <Property Name="Period" Type="int" />
-    <Property Name="StartTime" Type="datetime" />
-    <Property Name="AutoBuySell" Type="bit" />
+    <Property Name="Symbol" Type="nchar" MaxLength="6" Nullable="false" />
+    <Property Name="Period" Type="int" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="AutoBuySell" Type="bit" Nullable="false" />
+    <Property Name="AllTicks" Type="int" Nullable="false" />
+    <Property Name="MyTicks" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MTPeriod">
     <Key>
@@ -67,7 +69,7 @@
       <PropertyRef Name="SymbolName" />
       <PropertyRef Name="UserName" />
     </Key>
-    <Property Name="SymbolName" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="SymbolName" Type="nchar" MaxLength="6" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Status" Type="bit" />
   </EntityType>
@@ -84,7 +86,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_MTHistoryMS_MTPeriod">
-    <End Role="MTPeriod" Type="Self.MTPeriod" Multiplicity="0..1" />
+    <End Role="MTPeriod" Type="Self.MTPeriod" Multiplicity="1" />
     <End Role="MTHistoryMS" Type="Self.MTHistoryMS" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MTPeriod">
@@ -96,7 +98,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_MTHistoryMS_MTSymbols">
-    <End Role="MTSymbols" Type="Self.MTSymbols" Multiplicity="0..1" />
+    <End Role="MTSymbols" Type="Self.MTSymbols" Multiplicity="1" />
     <End Role="MTHistoryMS" Type="Self.MTHistoryMS" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MTSymbols">

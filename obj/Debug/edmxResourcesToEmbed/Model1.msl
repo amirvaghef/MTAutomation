@@ -4,76 +4,78 @@
     <EntitySetMapping Name="MTHistoryDTs">
       <EntityTypeMapping TypeName="MTProviderModel.MTHistoryDT">
         <MappingFragment StoreEntitySet="MTHistoryDT">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="MSID" ColumnName="MSID" />
-          <ScalarProperty Name="Time" ColumnName="Time" />
-          <ScalarProperty Name="Open" ColumnName="Open" />
-          <ScalarProperty Name="Close" ColumnName="Close" />
-          <ScalarProperty Name="Low" ColumnName="Low" />
-          <ScalarProperty Name="High" ColumnName="High" />
           <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="High" ColumnName="High" />
+          <ScalarProperty Name="Low" ColumnName="Low" />
+          <ScalarProperty Name="Close" ColumnName="Close" />
+          <ScalarProperty Name="Open" ColumnName="Open" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="MSID" ColumnName="MSID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MTHistoryMS">
       <EntityTypeMapping TypeName="MTProviderModel.MTHistoryM">
         <MappingFragment StoreEntitySet="MTHistoryMS">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-          <ScalarProperty Name="Period" ColumnName="Period" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="MyTicks" ColumnName="MyTicks" />
+          <ScalarProperty Name="AllTicks" ColumnName="AllTicks" />
           <ScalarProperty Name="AutoBuySell" ColumnName="AutoBuySell" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="Period" ColumnName="Period" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MTPeriods">
       <EntityTypeMapping TypeName="MTProviderModel.MTPeriod">
         <MappingFragment StoreEntitySet="MTPeriod">
-          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
           <ScalarProperty Name="PeriodName" ColumnName="PeriodName" />
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MTSymbols">
       <EntityTypeMapping TypeName="MTProviderModel.MTSymbol">
         <MappingFragment StoreEntitySet="MTSymbols">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="AskPrice" ColumnName="AskPrice" />
-          <ScalarProperty Name="BidPrice" ColumnName="BidPrice" />
-          <ScalarProperty Name="PerUSDAsk" ColumnName="PerUSDAsk" />
-          <ScalarProperty Name="PerUSDBid" ColumnName="PerUSDBid" />
-          <ScalarProperty Name="ChngFromUSDSymbol" ColumnName="ChngFromUSDSymbol" />
           <ScalarProperty Name="ChngToUSDSymbol" ColumnName="ChngToUSDSymbol" />
+          <ScalarProperty Name="ChngFromUSDSymbol" ColumnName="ChngFromUSDSymbol" />
+          <ScalarProperty Name="PerUSDBid" ColumnName="PerUSDBid" />
+          <ScalarProperty Name="PerUSDAsk" ColumnName="PerUSDAsk" />
+          <ScalarProperty Name="BidPrice" ColumnName="BidPrice" />
+          <ScalarProperty Name="AskPrice" ColumnName="AskPrice" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Positions">
       <EntityTypeMapping TypeName="MTProviderModel.Position">
         <MappingFragment StoreEntitySet="Positions">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="RowNO" ColumnName="RowNO" />
-          <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
-          <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
-          <ScalarProperty Name="Volume" ColumnName="Volume" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="PositionStatus" ColumnName="PositionStatus" />
-          <ScalarProperty Name="IsClose" ColumnName="IsClose" />
-          <ScalarProperty Name="PositionState" ColumnName="PositionState" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="ClosePrice" ColumnName="ClosePrice" />
-          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
-          <ScalarProperty Name="Leverage" ColumnName="Leverage" />
-          <ScalarProperty Name="PriceInUSD" ColumnName="PriceInUSD" />
           <ScalarProperty Name="PriceInUSDSymbol" ColumnName="PriceInUSDSymbol" />
+          <ScalarProperty Name="PriceInUSD" ColumnName="PriceInUSD" />
+          <ScalarProperty Name="Leverage" ColumnName="Leverage" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+          <ScalarProperty Name="ClosePrice" ColumnName="ClosePrice" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PositionState" ColumnName="PositionState" />
+          <ScalarProperty Name="IsClose" ColumnName="IsClose" />
+          <ScalarProperty Name="PositionStatus" ColumnName="PositionStatus" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
+          <ScalarProperty Name="TicketNo" ColumnName="TicketNo" />
+          <ScalarProperty Name="RowNO" ColumnName="RowNO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SymbolsEnables">
       <EntityTypeMapping TypeName="MTProviderModel.SymbolsEnable">
         <MappingFragment StoreEntitySet="SymbolsEnable">
-          <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="SymbolName" ColumnName="SymbolName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

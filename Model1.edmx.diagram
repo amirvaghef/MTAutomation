@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="92f0bb2408504fa7adb1cbb99f899c6c" Name="Diagram1">
-        <EntityTypeShape EntityType="MTProviderModel.MTHistoryDT" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MTProviderModel.MTHistoryM" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MTProviderModel.MTPeriod" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MTProviderModel.MTSymbol" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MTProviderModel.Position" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MTProviderModel.SymbolsEnable" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="MTProviderModel.FK_MTHistoryDT_MTHistoryMS" ManuallyRouted="false" />
-        <AssociationConnector Association="MTProviderModel.FK_MTHistoryMS_MTPeriod" ManuallyRouted="false" />
-        <AssociationConnector Association="MTProviderModel.FK_MTHistoryMS_MTSymbols" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MTProviderModel.MTHistoryDT" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="MTProviderModel.MTHistoryM" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="MTProviderModel.MTPeriod" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="MTProviderModel.MTSymbol" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="MTProviderModel.Position" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MTProviderModel.SymbolsEnable" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="MTProviderModel.FK_MTHistoryDT_MTHistoryMS" />
+        <AssociationConnector Association="MTProviderModel.FK_MTHistoryMS_MTPeriod" />
+        <AssociationConnector Association="MTProviderModel.FK_MTHistoryMS_MTSymbols" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
